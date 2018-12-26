@@ -24,8 +24,6 @@
 import NotebookList from './comp.list'
 import Note from './comp.note'
 
-const n = {title:'A',note:'---'}
-
 export default {
   name: 'app',
   components: {
@@ -59,10 +57,8 @@ export default {
 </script>
 
 <style>
-
 #notelist {
   overflow-y: auto;
   height: 400px;
 }
-
 </style>
