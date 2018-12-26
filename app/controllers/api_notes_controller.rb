@@ -1,4 +1,4 @@
-class ApiNotesController < ApplicationController
+class ApiNotesController < ApiController
   def index
     notes = Note.all
     json_response(notes)
