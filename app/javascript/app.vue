@@ -23,6 +23,10 @@
 <script>
 import NotebookList from './comp.list'
 import Note from './comp.note'
+import axios from 'axios'
+
+let api = '/api/v1/notes/'
+
 
 export default {
   name: 'app',
@@ -52,6 +56,12 @@ export default {
       this.notes.splice(this.index, 1)
       this.index = Math.max(this.index - 1, 0)
     }
+  },
+  beforeMount() {
+    axios.get(api)
+      .then(response => {
+        this.notes = response.data.payload;
+      });
   }
 }
 </script>
