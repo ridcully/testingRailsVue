@@ -7,7 +7,11 @@
           v-bind:class="{ 'active': index === activeNote }"
           @click="onChangeNote(index)"
           >
-          <div>{{ note.title }}</div>
+          <div>{{ note.title }}
+            <span class="badge badge-secondary" v-if="note.dirty">
+              <template v-if="note.created_at">changed</template>
+              <template v-else>new</template>
+            </span></div>
       </li>
       <li class="list-group-item text-center" @click="onNewNote()">&lt; Add a Note &gt;</li>
     </ul>

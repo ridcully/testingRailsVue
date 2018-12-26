@@ -39,20 +39,21 @@ export default {
     index: 0
   }),
   methods: {
-    newNote () {
+    newNote() {
       this.notes.push({
         title: '',
-        note: ''
+        note: '',
+        dirty: true,
       })
       this.index = this.notes.length - 1
     },
-    changeNote (index) {
+    changeNote(index) {
       this.index = index
     },
-    saveNote () {
+    saveNote() {
       // nothing as of yet
     },
-    deleteNote () {
+    deleteNote() {
       this.notes.splice(this.index, 1)
       this.index = Math.max(this.index - 1, 0)
     }
