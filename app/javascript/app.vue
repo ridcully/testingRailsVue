@@ -9,10 +9,10 @@
       <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-12" id="app">
         <div class="row">
           <div class="col-5" id="notelist">
-            <NotebookList @note-change="changeNote" @note-new="newNote" :notes="notes" :activeNote="index" />
+            <NotebookList @note-change="changeNote" @note-new="newNote" :notes="notes.list" :activeNote="index" />
           </div>
           <div class="col-7">
-            <Note @note-save="saveNote" @note-delete="deleteNote" :note="notes[index]" />
+            <Note @note-save="saveNote()" @note-delete="deleteNote" :note="notes.list[index]" />
           </div>
         </div>
       </div>
@@ -23,10 +23,7 @@
 <script>
 import NotebookList from './comp.list'
 import Note from './comp.note'
-import axios from 'axios'
-
-let api = '/api/v1/notes/'
-
+import Notes from 'notes'
 
 export default {
   name: 'app',
@@ -35,34 +32,31 @@ export default {
     Note
   },
   data: () => ({
-    notes: [],
+    notes: Notes,
     index: 0
   }),
   methods: {
     newNote() {
-      this.notes.push({
+      this.notes.list.push({
         title: '',
         note: '',
         dirty: true,
       })
-      this.index = this.notes.length - 1
+      this.index = this.notes.list.length - 1
     },
     changeNote(index) {
       this.index = index
     },
     saveNote() {
-      // nothing as of yet
+      this.notes.update(this.index)
     },
     deleteNote() {
-      this.notes.splice(this.index, 1)
+      this.notes.list.splice(this.index, 1)
       this.index = Math.max(this.index - 1, 0)
     }
   },
   beforeMount() {
-    axios.get(api)
-      .then(response => {
-        this.notes = response.data.payload;
-      });
+    this.notes.load();
   }
 }
 </script>
@@ -70,6 +64,6 @@ export default {
 <style>
 #notelist {
   overflow-y: auto;
-  height: 400px;
+  height: 430px;
 }
 </style>

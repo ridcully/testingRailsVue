@@ -28,13 +28,13 @@ export default {
   props: ['note'],
   methods: {
     onDelete() {
-      this.$emit('note-delete')
+      this.$emit('note-delete');
     },
     onSave() {
-      this.$emit('note-save')
+      this.$emit('note-save');
     },
     onModified() {
-      this.note.dirty = true
+      this.note.dirty = true;
     }
   }
 }
