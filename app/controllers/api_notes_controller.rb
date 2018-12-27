@@ -59,6 +59,21 @@ class ApiNotesController < ApiController
     end
   end
 
+  def search
+    # prepare search term
+    if nil == params[:term]
+      return json_response(nil, :failed, "No search term.");
+    end
+    if params[:term].length < 3
+      return json_response(nil, :failed, "Search term to short.")
+    end
+    searchterm = '%' + params[:term] + '%'
+
+    # search in title and note
+    notes = Note.all.where('title LIKE :term OR note LIKE :term', {term: searchterm})
+    json_response(notes)
+  end
+
   # helper
   private def json_response(object, status = :ok, message = nil)
     render json: {

@@ -20,7 +20,18 @@ export default {
     }
 
     // do the search
-    console.log("Search for " + term + " triggered...")
+    axios.get(api + 'search/?term=' + term + '&' + Math.random().toString())
+      .then(response => {
+        this.list = response.data.payload;
+      })
+      .catch(error => {
+        if (error.response.data.message) {
+          // show the error message from the api.
+          alert(error.response.data.message);
+        } else {
+          alert('Failed');
+        }
+      })
   },
 
   update(index) {
