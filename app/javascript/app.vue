@@ -51,8 +51,10 @@ export default {
       this.notes.update(this.index)
     },
     deleteNote() {
-      this.notes.list.splice(this.index, 1)
-      this.index = Math.max(this.index - 1, 0)
+      this.notes.delete(this.index)
+      if (this.index > this.notes.list.length) {
+        this.index = this.notes.list.length
+      }
     }
   },
   beforeMount() {

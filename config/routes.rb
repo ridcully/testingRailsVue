@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         scope '/:id' do
           get '/' => 'api_notes#show'
           put '/' => 'api_notes#update'
+          delete '/' => 'api_notes#delete'
         end
       end
     end

@@ -46,6 +46,19 @@ class ApiNotesController < ApiController
     end
   end
 
+  def delete
+    # Check if note exists
+    if not Note.exists?(params[:id])
+      return json_response(nil, :failed, "Note not found.")
+    end
+
+    if Note.delete(params[:id])
+      json_response(nil, :ok, "Note deleted.")
+    else
+      json_response(note, :failed, "Could not delete note.")
+    end
+  end
+
   # helper
   private def json_response(object, status = :ok, message = nil)
     render json: {
