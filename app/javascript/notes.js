@@ -13,6 +13,16 @@ export default {
       });
   },
 
+  search(term) {
+    // check if a search term is given.
+    if (term == '') {
+      return this.load();
+    }
+
+    // do the search
+    console.log("Search for " + term + " triggered...")
+  },
+
   update(index) {
     // Check if we have an existing entry
     if (this.list[index].created_at) {

@@ -7,6 +7,13 @@
     </div>
     <div class="row">
       <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-12" id="app">
+        <p>
+          <Search :search="searchTerm" @note-search="searchNote" />
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-12" id="app">
         <div class="row">
           <div class="col-5" id="notelist">
             <NotebookList @note-change="changeNote" @note-new="newNote" :notes="notes.list" :activeNote="index" />
@@ -26,6 +33,7 @@
 </template>
 
 <script>
+import Search from './comp.search'
 import NotebookList from './comp.list'
 import Note from './comp.note'
 import Notes from 'notes'
@@ -33,12 +41,14 @@ import Notes from 'notes'
 export default {
   name: 'app',
   components: {
+    Search,
     NotebookList,
     Note
   },
   data: () => ({
     notes: Notes,
-    index: 0
+    index: 0,
+    searchTerm: ''
   }),
   mounted() {
     // install key listener for hotskeys
@@ -91,6 +101,10 @@ export default {
       if (this.index > this.notes.list.length) {
         this.index = this.notes.list.length;
       }
+    },
+    searchNote(searchTerm) {
+      this.searchTerm = searchTerm;
+      this.notes.search(searchTerm);
     }
   }
 }
