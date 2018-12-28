@@ -2,9 +2,12 @@
   <div>
     <div v-if="note" class="form-group">
       <label for="title">Title</label>
-      <input class="form-control" type="text" v-model="note.Title" name="title" placeholder="Your note title" @keyup="onModified()" />
+      <input class="form-control" type="text" v-model="note.Title" name="title" placeholder="Your note title." @keyup="onModified()" />
       <label for="note">Note</label>
       <textarea class="form-control" name="note" v-model="note.Note" placeholder="Your note." rows="6" @keyup="onModified()"></textarea>
+      <label for="note">Link</label>
+      <input class="form-control" type="text" v-model="note.Link" name="link" placeholder="Your note link." @keyup="onModified()" />
+      <small v-if="note.Link"><a :href="note.Link" target="blank">Vist {{note.Link}}</a></small>
       <hr />
       <span v-if="note.created_at">
         <small>Created: {{ note.created_at }}</small><br>
