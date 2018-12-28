@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_28_143919) do
+ActiveRecord::Schema.define(version: 2018_12_28_173601) do
 
   create_table "locations", force: :cascade do |t|
     t.string "Name"
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(version: 2018_12_28_143919) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "Link"
+  end
+
+  create_table "notes_tags", id: false, force: :cascade do |t|
+    t.integer "note_id", null: false
+    t.integer "tag_id", null: false
+    t.index ["note_id"], name: "index_notes_tags_on_note_id"
+    t.index ["tag_id"], name: "index_notes_tags_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|

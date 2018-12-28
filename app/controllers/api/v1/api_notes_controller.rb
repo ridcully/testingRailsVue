@@ -2,8 +2,13 @@ module Api
   module V1
     class ApiNotesController < ApiController
       def index
-        notes = Note.all
-        json_response(notes)
+        # load
+        notes = Note.preload(:tags)
+
+        # do some magic to include referenced tags in output
+        n2 = ActiveSupport::JSON.decode(notes.to_json(include: :tags))
+
+        json_response(n2)
       end
 
       def create
