@@ -8,8 +8,8 @@ module Api
 
       def create
         note = Note.new
-        note.title = params[:title]
-        note.note = params[:note]
+        note.Title = params[:title]
+        note.Note = params[:note]
 
         if note.save
           json_response(note, :ok, "Note created.")
@@ -37,8 +37,8 @@ module Api
 
         # load note and update it
         note = Note.find(params[:id])
-        note.title = params[:title]
-        note.note  = params[:note]
+        note.Title = params[:title]
+        note.Note  = params[:note]
 
         # save changes
         if note.save
@@ -72,17 +72,8 @@ module Api
         searchterm = '%' + params[:term] + '%'
 
         # search in title and note
-        notes = Note.all.where('title LIKE :term OR note LIKE :term', {term: searchterm})
+        notes = Note.all.where('Title LIKE :term OR Note LIKE :term', {term: searchterm})
         json_response(notes)
-      end
-
-      # helper
-      private def json_response(object, status = :ok, message = nil)
-        render json: {
-                status: status == :ok ? "success" : "failed",
-                message: message,
-                payload: object},
-              status: status
       end
     end
   end
