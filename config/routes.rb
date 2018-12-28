@@ -16,6 +16,15 @@ Rails.application.routes.draw do
           delete '/' => 'api_notes#delete'
         end
       end
+      scope '/tags' do
+        get '/' => 'api_tags#index'
+        post '/' => 'api_tags#create'
+        scope '/:id' do
+          get '/' => 'api_tags#show'
+          put '/' => 'api_tags#update'
+          delete '/' => 'api_tags#delete'
+        end
+      end
     end
   end
 
