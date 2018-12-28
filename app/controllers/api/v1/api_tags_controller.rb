@@ -8,7 +8,7 @@ module Api
 
       def create
         tag = Tag.new
-        tag.Name = params[:name]
+        tag.Name = params[:Name]
 
         if tag.save
           json_response(tag, :ok, "Tag created.")
@@ -36,7 +36,7 @@ module Api
 
         # load tag and update it
         tag = Tag.find(params[:id])
-        tag.Name = params[:name]
+        tag.Name = params[:Name]
 
         # save changes
         if tag.save

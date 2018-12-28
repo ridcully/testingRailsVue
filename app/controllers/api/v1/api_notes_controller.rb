@@ -8,8 +8,8 @@ module Api
 
       def create
         note = Note.new
-        note.Title = params[:title]
-        note.Note = params[:note]
+        note.Title = params[:Title]
+        note.Note = params[:Note]
 
         if note.save
           json_response(note, :ok, "Note created.")
@@ -37,8 +37,8 @@ module Api
 
         # load note and update it
         note = Note.find(params[:id])
-        note.Title = params[:title]
-        note.Note  = params[:note]
+        note.Title = params[:Title]
+        note.Note  = params[:Note]
 
         # save changes
         if note.save

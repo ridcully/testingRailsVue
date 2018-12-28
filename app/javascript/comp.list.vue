@@ -7,7 +7,7 @@
           v-bind:class="{ 'active': index === activeNote }"
           @click="onChangeNote(index)"
           >
-          <div>{{ note.title }}
+          <div>{{ note.Title }}
             <span class="badge badge-secondary" v-if="note.dirty">
               <template v-if="note.created_at">changed</template>
               <template v-else>new</template>

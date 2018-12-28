@@ -2,9 +2,9 @@
   <div>
     <div v-if="note" class="form-group">
       <label for="title">Title</label>
-      <input class="form-control" type="text" v-model="note.title" name="title" placeholder="Your note title" @keyup="onModified()" />
+      <input class="form-control" type="text" v-model="note.Title" name="title" placeholder="Your note title" @keyup="onModified()" />
       <label for="note">Note</label>
-      <textarea class="form-control" name="note" v-model="note.note" placeholder="Your note." rows="6" @keyup="onModified()"></textarea>
+      <textarea class="form-control" name="note" v-model="note.Note" placeholder="Your note." rows="6" @keyup="onModified()"></textarea>
       <hr />
       <span v-if="note.created_at">
         <small>Created: {{ note.created_at }}</small><br>
