@@ -57,7 +57,7 @@ module Api
         if Note.delete(params[:id])
           json_response(nil, :ok, "Note deleted.")
         else
-          json_response(note, :failed, "Could not delete note.")
+          json_response(nil, :failed, "Could not delete note.")
         end
       end
 
