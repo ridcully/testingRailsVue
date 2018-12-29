@@ -1,24 +1,28 @@
-# README
+# Rails on Notes
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple notes app that is my playground for evaluating the latest Ruby on Rails and Vue.js. Feel free to take a look, but don't expect to mutch here.
 
-Things you may want to cover:
+## How do I get this all to run
 
-* Ruby version
+* Clone this repository.
 
-* System dependencies
+* Change to the directory where you cloned the repository and run:
 
-* Configuration
+```bash
+bundle install
+```
 
-* Database creation
+* Do the rails database migrations:
 
-* Database initialization
+```bash
+rails db:migrate
+```
 
-* How to run the test suite
+* Run the rails development server:
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+rails server
+```
 
-* Deployment instructions
+* Go to your browser and open the page http://localhost:3000 to see the notes app.
 
-* ...
