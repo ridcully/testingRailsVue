@@ -82,6 +82,44 @@ module Api
         notes = Note.all.where('Title LIKE :term OR Note LIKE :term', {term: searchterm})
         json_response(notes)
       end
+
+      def update_tags
+        # Check if note exists
+        if not Note.exists?(params[:id])
+          return json_response(nil, :failed, "Note not found.")
+        end
+
+        # load note and delete all tags
+        note = Note.find(params[:id])
+        note.tags = [];
+
+        # get post tags and add them to the note
+        for e in params[:tags]
+          if e[:id]
+            # Tag has an id. Load tag by id and add to note
+            tag = Tag.find(e[:id])
+          elsif e[:Name] && e[:Name] != ""
+            # no id, so load by name
+            tag = Tag.find_by_Name(e[:Name].strip)
+            if tag == nil
+              # no tag with this name found. create one.
+              tag = Tag.new
+              tag.Name = e[:Name].strip
+              tag.save
+            end
+
+          end
+          # add tag
+          note.tags.push(tag)
+        end
+
+        # save
+        if note.save
+          json_response(note, :ok, "Tags saved.")
+        else
+          json_response(note, :failed, "Could not save tags.")
+        end
+      end
     end
   end
 end
