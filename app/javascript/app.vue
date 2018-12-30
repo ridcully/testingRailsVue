@@ -113,6 +113,6 @@ export default {
 <style>
 #notelist {
   overflow-y: auto;
-  height: 430px;
+  height: 640px;
 }
 </style>

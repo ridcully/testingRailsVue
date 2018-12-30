@@ -38,11 +38,11 @@ export default {
     // Check if we have an existing entry
     if (this.list[index].created_at) {
       // Update
-      axios.put(api + this.list[index].id.toString(), this.list[index])
+      axios.put(api + this.list[index].id.toString() + '?' + Math.random().toString(), this.list[index])
         .then(response => {
           this.list[index].dirty = false;
 
-          this.updateTags(index);
+          this.updateReferenced(index);
         });
     } else {
       // Post new entry
@@ -56,7 +56,7 @@ export default {
           this.list[index] = response.data.payload;
 
           this.list[index].tags = tags;
-          this.updateTags(index);
+          this.updateReferenced(index);
         })
         .catch(error => {
           // This might need to be handled correct.
@@ -65,9 +65,13 @@ export default {
     }
   },
 
-  updateTags(index) {
+  updateReferenced(index) {
+    console.log(this.list[index]);
     if (this.list[index].tags && (this.list[index].tags.length > 0)) {
       axios.post(api + '/' + this.list[index].id + '/tags?' + Math.random().toString(), {tags:this.list[index].tags})
+    }
+    if (this.list[index].location) {
+      axios.post(api + '/' + this.list[index].id + '/location?' + Math.random().toString(), {location:this.list[index].location})
     }
   },
 
