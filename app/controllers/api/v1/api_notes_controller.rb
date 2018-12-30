@@ -71,10 +71,10 @@ module Api
       def search
         # prepare search term
         if nil == params[:term]
-          return json_response(nil, :failed, "No search term.");
+          return json_response(nil, :forbidden, "No search term.");
         end
         if params[:term].length < 3
-          return json_response(nil, :failed, "Search term to short.")
+          return json_response(nil, :forbidden, "Search term to short.")
         end
         searchterm = '%' + params[:term] + '%'
 
