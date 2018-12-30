@@ -66,7 +66,6 @@ export default {
   },
 
   updateReferenced(index) {
-    console.log(this.list[index]);
     if (this.list[index].tags && (this.list[index].tags.length > 0)) {
       axios.post(api + '/' + this.list[index].id + '/tags?' + Math.random().toString(), {tags:this.list[index].tags})
     }

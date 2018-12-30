@@ -6,7 +6,7 @@ module Api
         notes = Note.preload(:tags)
 
         # do some magic to include referenced tags in output
-        n2 = ActiveSupport::JSON.decode(notes.to_json(include: :tags))
+        n2 = ActiveSupport::JSON.decode(notes.to_json(include: [:tags, :location]))
 
         json_response(n2)
       end
@@ -112,6 +112,40 @@ module Api
           # add tag
           note.tags.push(tag)
         end
+
+        # save
+        if note.save
+          json_response(note, :ok, "Tags saved.")
+        else
+          json_response(note, :failed, "Could not save tags.")
+        end
+      end
+
+      def update_location
+        # Check if note exists
+        if not Note.exists?(params[:id])
+          return json_response(nil, :failed, "Note not found.")
+        end
+
+        # load note
+        note = Note.find(params[:id])
+
+        # set location
+        if params[:location][:id]
+          loc = Location.find(params[:location][:id])
+        else
+          loc = Location
+              .where('Latitude = ? AND Longitude = ?', params[:location][:Latitude], params[:location][:Longitude])
+              .first
+
+          if loc == nil
+            loc = Location.new
+            loc.Latitude  = params[:location][:Latitude]
+            loc.Longitude = params[:location][:Longitude]
+            loc.save
+          end
+        end
+        note.location = loc
 
         # save
         if note.save

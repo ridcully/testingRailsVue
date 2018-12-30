@@ -19,6 +19,9 @@ Rails.application.routes.draw do
           scope '/tags' do
             post '/' => 'api_notes#update_tags'
           end
+          scope '/location' do
+            post '/' => 'api_notes#update_location'
+          end
         end
       end
       # tags api
